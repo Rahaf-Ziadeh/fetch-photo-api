@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "./App.css"; // Make sure this line exists
+import "./App.css"; 
 
 function App() {
   const [photos, setPhotos] = useState([]);
