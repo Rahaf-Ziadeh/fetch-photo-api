@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import "./App.css"; // Make sure this line exists
 
 function App() {
   const [photos, setPhotos] = useState([]);
@@ -30,43 +31,18 @@ function App() {
   if (error) return <p>Error: {error}</p>;
 
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-        minHeight: "100vh",
-        padding: "20px",
-      }}
-    >
-      <h2 style={{ textAlign: "center" }}>Fetched {photos.length} photos</h2>
+    <div className="app-container">
+      <h2 className="photo-heading">Fetched {photos.length} photos</h2>
 
-      <div
-        style={{
-          display: "flex",
-          flexWrap: "wrap",
-          justifyContent: "center",
-          gap: "16px",
-          marginTop: "20px",
-        }}
-      >
+      <div className="photos-grid">
         {photos.map((photo) => (
-          <div
-            key={photo.id}
-            style={{
-              width: "150px",
-              background: "#bdaaaaff",
-              padding: "10px",
-              textAlign: "center",
-            }}
-          >
+          <div className="photo-card" key={photo.id}>
             <img
               src={photo.thumbnailUrl}
               alt={photo.title}
               style={{ width: "100%" }}
             />
-            <p style={{ fontSize: "12px" }}>{photo.title}</p>
+            <p className="photo-title">{photo.title}</p>
           </div>
         ))}
       </div>
