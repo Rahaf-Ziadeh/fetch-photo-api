@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
+import "./App.css";
 
 function App() {
-  const [count, setCount] = useState(null);
+  const [photos, setPhotos] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -15,7 +16,7 @@ function App() {
           throw new Error("failed to fetch");
         }
         const data = await response.json();
-        setCount(data.length);
+        setPhotos(data);
       } catch (err) {
         setError(err.message);
       } finally {
@@ -26,12 +27,30 @@ function App() {
     fetchPhotos();
   }, []);
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) return <p>Loading photos...</p>;
   if (error) return <p>Error: {error}</p>;
 
+  function Card({ thumbnailUrl, alt, id }) {
+    return (
+      <div className="photo-card" key={id}>
+        <img src={thumbnailUrl} alt={alt} style={{ width: "100%" }} />
+        <p className="photo-title">{alt}</p>
+      </div>
+    );
+  }
   return (
-    <div style={{ width: "100%", textAlign: "center" }}>
-      <h2>Fetched {count} photos</h2>
+    <div className="app-container">
+      <h2 className="photo-heading">Fetched {photos.length} photos</h2>
+
+      <div className="photos-grid">
+        {photos.map((photo) => (
+          <Card
+            key={photo.id}
+            thumbnail={photo.thumbnailUrl}
+            alt={photo.title}
+          />
+        ))}
+      </div>
     </div>
   );
 }
