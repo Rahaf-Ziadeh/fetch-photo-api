@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "./App.css"; // Make sure this line exists
+import "./App.css";
 
 function App() {
   const [photos, setPhotos] = useState([]);
@@ -30,20 +30,25 @@ function App() {
   if (loading) return <p>Loading photos...</p>;
   if (error) return <p>Error: {error}</p>;
 
+  function Card({ thumbnailUrl, alt, id }) {
+    return (
+      <div className="photo-card" key={id}>
+        <img src={thumbnailUrl} alt={alt} style={{ width: "100%" }} />
+        <p className="photo-title">{alt}</p>
+      </div>
+    );
+  }
   return (
     <div className="app-container">
       <h2 className="photo-heading">Fetched {photos.length} photos</h2>
 
       <div className="photos-grid">
         {photos.map((photo) => (
-          <div className="photo-card" key={photo.id}>
-            <img
-              src={photo.thumbnailUrl}
-              alt={photo.title}
-              style={{ width: "100%" }}
-            />
-            <p className="photo-title">{photo.title}</p>
-          </div>
+          <Card
+            key={photo.id}
+            thumbnail={photo.thumbnailUrl}
+            alt={photo.title}
+          />
         ))}
       </div>
     </div>
