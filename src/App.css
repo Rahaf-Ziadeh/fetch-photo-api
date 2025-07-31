@@ -68,6 +68,19 @@
   padding: 10px;
   text-align: center;
 }
+.photo-card {
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.photo-card:hover {
+  transform: scale(1.03);
+}
+
+.photo-card.selected {
+  background: rgb(73, 60, 60);
+  box-shadow: 0 0 10px rgba(76, 175, 80, 0.5);
+}
 
 .photo-title {
   font-size: 12px;
