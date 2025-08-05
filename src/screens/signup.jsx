@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../firebase";
-import "../screens/screens.css";
+import { auth } from "../services/firebase";
+import "../styles/screens.css";
 import { sendEmailVerification } from "firebase/auth";
 
 function SignUp() {
@@ -32,7 +32,7 @@ function SignUp() {
       setMsg("Verification email sent. Please check your inbox.");
       console.log("User created:", userCredential.user);
 
-      await auth.signOut(); 
+      await auth.signOut();
     } catch (error) {
       setError(error.message);
     }

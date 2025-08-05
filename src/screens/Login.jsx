@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../firebase";
-import "../screens/screens.css";
+import { auth } from "../services/firebase";
+import "../styles/screens.css";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -26,7 +26,6 @@ function Login() {
       }
 
       setMsg("Login successful!");
-    
     } catch (error) {
       setMsg(error.message);
     }

@@ -1,5 +1,5 @@
 import React from "react";
-import "../App.css";
+import "../styles/App.css";
 
 function Card({ thumbnailUrl, alt, id, isSelected, onClick }) {
   return (
