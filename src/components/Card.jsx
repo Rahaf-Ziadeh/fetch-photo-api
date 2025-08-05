@@ -1,9 +1,12 @@
 import React from "react";
 import "../App.css";
 
-function Card({ thumbnailUrl, alt, id }) {
+function Card({ thumbnailUrl, alt, id, isSelected, onClick }) {
   return (
-    <div className="photo-card" key={id}>
+    <div
+      className={`photo-card ${isSelected ? "selected" : ""}`}
+      onClick={() => onClick(id)}
+    >
       <img src={thumbnailUrl} alt={alt} style={{ width: "100%" }} />
       <p className="photo-title">{alt}</p>
     </div>
