@@ -1,9 +1,10 @@
 import React from "react";
 import "./App.css";
-import HomeScreen from "./screens/Homepage";
+import SignUp from "./screens/Register";
+import Register from "./screens/Register";
 
 function App() {
-  return <HomeScreen />;
+  return <Register />;
 }
 
 export default App;
