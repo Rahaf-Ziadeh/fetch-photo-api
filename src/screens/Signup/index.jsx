@@ -1,7 +1,10 @@
-import React, { useState } from "react";
+import React, {useState } from "react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../services/firebase";
-import "../styles/screens.css";
+import { auth } from "../../services/firebase";
+import "./style.css";
+import "../../i18n";
+import { useTranslation } from "react-i18next";
+
 import { sendEmailVerification } from "firebase/auth";
 
 function SignUp() {
@@ -10,6 +13,8 @@ function SignUp() {
   const [repeatPassword, setRepeatPassword] = useState("");
   const [msg, setMsg] = useState("");
   const [error, setError] = useState("");
+  const { t } = useTranslation();
+
 
   const handleSignUp = async (e) => {
     e.preventDefault();
@@ -29,7 +34,7 @@ function SignUp() {
       );
       await sendEmailVerification(userCredential.user);
 
-      setMsg("Verification email sent. Please check your inbox.");
+      setMsg(t("Verification email sent. Please check your inbox."));
       console.log("User created:", userCredential.user);
 
       await auth.signOut();
@@ -40,8 +45,8 @@ function SignUp() {
 
   return (
     <div className="container">
-      <h1>Sign Up</h1>
-      <p>Please fill in this form to create an account.</p>
+      <h1>{t("Sign up")}</h1>
+      <p>{t("Please fill in this form to create an account.")}</p>
       <hr />
       <div className="container">
         {error && <p className="error">{error}</p>}
@@ -51,29 +56,29 @@ function SignUp() {
 
       <form onSubmit={handleSignUp}>
         <label>
-          <b>Email</b>
+          <b>{t("Email")}</b>
         </label>
         <input
           type="email"
-          placeholder="Enter Email"
+          placeholder={t("Enter Email")}
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
         />
 
         <label>
-          <b>Password</b>
+          <b>{t("Password")}</b>
         </label>
         <input
           type="password"
-          placeholder="Enter Password"
+          placeholder={t("Enter Password")}
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
         />
 
         <label>
-          <b>Repeat Password</b>
+          <b>{t("Repeat Password")}</b>
         </label>
         <input
           type="password"
@@ -85,10 +90,10 @@ function SignUp() {
 
         <div className="clearfix">
           <button type="button" className="cancelbtn">
-            Cancel
+            {t("Cancel")}
           </button>
           <button type="submit" className="signupbtn">
-            Sign Up
+            {t("Sign up")}
           </button>
         </div>
       </form>

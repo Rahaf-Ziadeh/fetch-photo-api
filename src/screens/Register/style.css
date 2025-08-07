@@ -1,0 +1,30 @@
+.link-button {
+  background: none;
+  border: none;
+  color: blue;
+  text-decoration: underline;
+  cursor: pointer;
+}
+.register-container {
+  position: relative;
+  padding: 20px;
+}
+
+.language-toggle {
+  position: absolute;
+  top: 30px;
+  right: 30px;
+}
+
+.language-toggle button {
+  margin-left: 5px;
+  padding: 5px 10px;
+  background-color: #ddd;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.language-toggle button:hover {
+  background-color: #bbb;
+}
