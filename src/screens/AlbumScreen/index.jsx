@@ -17,7 +17,7 @@ function AlbumScreen() {
 
   
   useEffect(() => {
- i18n.changeLanguage("ar");
+ 
     async function loadPhotos() {
       try {
         const data = await fetchPhotos();
