@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../services/firebase";
-import "../styles/screens.css";
+import { auth } from "../../services/firebase";
+import { useTranslation } from "react-i18next";
+import "./style.css";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [msg, setMsg] = useState("");
+  const { t } = useTranslation();
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -21,11 +23,11 @@ function Login() {
       const user = userCredential.user;
 
       if (!user.emailVerified) {
-        setMsg("Please verify your email before logging in.");
+        setMsg(t("Please verify your email to access the app."));
         return;
       }
 
-      setMsg("Login successful!");
+      setMsg(`${t("Login")} ${t("successful") }!`);
     } catch (error) {
       setMsg(error.message);
     }
@@ -33,34 +35,35 @@ function Login() {
 
   return (
     <div className="container">
-      <h1>Login</h1>
-      <p>Enter your credentials to log in.</p>
+      <h1>{t("Login")}</h1>
+      <p>{t("Enter your credentials to log in.")}</p>
       <hr />
 
-      {msg && (
-        <p style={{ color: msg.includes("successful") ? "green" : "red" }}>
-          {msg}
-        </p>
-      )}
+     {msg && (
+  <p className={msg.includes("successful") ? "message-success" : "message-error"}>
+    {msg}
+  </p>
+)}
+
 
       <form onSubmit={handleLogin}>
         <label>
-          <b>Email</b>
+          <b>{t("Email")}</b>
         </label>
         <input
           type="email"
-          placeholder="Enter Email"
+          placeholder={t("Enter Email")}
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
         />
 
         <label>
-          <b>Password</b>
+          <b>{t("Password")}</b>
         </label>
         <input
           type="password"
-          placeholder="Enter Password"
+          placeholder={t("Enter Password")}
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
@@ -68,7 +71,7 @@ function Login() {
 
         <div className="clearfix">
           <button type="submit" className="signupbtn">
-            Login
+            {t("Login")}
           </button>
         </div>
       </form>
