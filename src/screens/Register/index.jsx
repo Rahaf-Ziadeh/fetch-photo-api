@@ -7,21 +7,24 @@ import HomeScreen from "../HomePage";
 import "../../i18n";
 import { useTranslation } from "react-i18next";
 import "./style.css";
-
+import LanguageBtn from "../../components/LanguageBtn";
 
 function Register() {
   const [user, setUser] = useState(null);
   const [showSignUp, setShowSignUp] = useState(false);
   const { t, i18n } = useTranslation();
 
- useEffect(() => {
-  i18n.changeLanguage("ar");
-  const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-    setUser(currentUser);
-  });
-  return () => unsubscribe();
-}, []); 
+  useEffect(() => {
+    const savedLang = localStorage.getItem("preferredLanguage") || "en";
+    i18n.changeLanguage(savedLang);
 
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+    });
+    return () => unsubscribe();
+  }, []);
+
+  
 
   const handleLogout = () => {
     signOut(auth);
@@ -29,11 +32,8 @@ function Register() {
 
   return (
     <div className="register-container">
-      <div className="language-toggle">
-        <button onClick={() => i18n.changeLanguage("en")}>EN</button>
-        <button onClick={() => i18n.changeLanguage("ar")}>AR</button>
-      </div>
-      
+   
+
       {user ? (
         user.emailVerified ? (
           <>
@@ -46,7 +46,7 @@ function Register() {
         ) : (
           <>
             <h2>{t("Please verify your email to access the app.")}</h2>
-            <button onClick={handleLogout}>Logout</button>
+            <button onClick={handleLogout}>{t("Logout")}</button>
           </>
         )
       ) : (

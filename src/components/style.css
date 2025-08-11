@@ -1,0 +1,18 @@
+.language-toggle {
+  position: absolute;
+  top: 30px;
+  left: 30px;
+}
+
+.language-toggle-btn {
+  padding: 10px 20px;
+  background-color: #565050;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  float: left;
+}
+
+.language-toggle-btn:hover {
+  background-color: #6f6060;
+}

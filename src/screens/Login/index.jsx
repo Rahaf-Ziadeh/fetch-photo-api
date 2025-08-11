@@ -3,6 +3,8 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../services/firebase";
 import { useTranslation } from "react-i18next";
 import "./style.css";
+import LanguageBtn from "../../components/LanguageBtn";
+import "../../i18n";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -27,7 +29,7 @@ function Login() {
         return;
       }
 
-      setMsg(`${t("Login")} ${t("successful") }!`);
+      setMsg(`${t("Login")} ${t("successful")}!`);
     } catch (error) {
       setMsg(error.message);
     }
@@ -35,16 +37,20 @@ function Login() {
 
   return (
     <div className="container">
+      <LanguageBtn />
       <h1>{t("Login")}</h1>
       <p>{t("Enter your credentials to log in.")}</p>
       <hr />
 
-     {msg && (
-  <p className={msg.includes("successful") ? "message-success" : "message-error"}>
-    {msg}
-  </p>
-)}
-
+      {msg && (
+        <p
+          className={
+            msg.includes("successful") ? "message-success" : "message-error"
+          }
+        >
+          {msg}
+        </p>
+      )}
 
       <form onSubmit={handleLogin}>
         <label>

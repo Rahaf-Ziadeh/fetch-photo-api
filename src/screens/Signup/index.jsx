@@ -6,6 +6,7 @@ import "../../i18n";
 import { useTranslation } from "react-i18next";
 
 import { sendEmailVerification } from "firebase/auth";
+import LanguageBtn from "../../components/LanguageBtn";
 
 function SignUp() {
   const [email, setEmail] = useState("");
@@ -45,6 +46,7 @@ function SignUp() {
 
   return (
     <div className="container">
+      <LanguageBtn />
       <h1>{t("Sign up")}</h1>
       <p>{t("Please fill in this form to create an account.")}</p>
       <hr />

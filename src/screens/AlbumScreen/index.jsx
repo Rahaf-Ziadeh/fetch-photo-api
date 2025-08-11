@@ -7,6 +7,7 @@ import { doc, setDoc, getDoc } from "firebase/firestore";
 import { auth } from "../../services/firebase";
 import "../../i18n";
 import { useTranslation } from "react-i18next";
+import LanguageBtn from "../../components/LanguageBtn";
 
 function AlbumScreen() {
   const [photos, setPhotos] = useState([]);
@@ -15,9 +16,10 @@ function AlbumScreen() {
   const [selected, setSelected] = useState([]);
   const { t, i18n } = useTranslation();
 
-  
   useEffect(() => {
- i18n.changeLanguage("ar");
+    const savedLang = localStorage.getItem("preferredLanguage") || "ar";
+    i18n.changeLanguage(savedLang);
+
     async function loadPhotos() {
       try {
         const data = await fetchPhotos();
@@ -76,6 +78,7 @@ function AlbumScreen() {
 
   return (
     <div className="app-container">
+      <LanguageBtn />
       <h2 className="photo-heading">
         {t("Fetched")} {photos.length} {t("photos")} | {t("Selected")}:{" "}
         {selected.length}
